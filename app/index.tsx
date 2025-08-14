@@ -6,6 +6,8 @@ import { contentTable } from "../db/schema";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 import migrations from "../drizzle/migrations";
 import { Modal } from "react-native";
+import { datetime } from "drizzle-orm/singlestore-core";
+import { Button } from "@react-navigation/elements";
 
 const expo = SQLite.openDatabaseSync("db.db");
 
@@ -70,10 +72,15 @@ export default function Index() {
         alignItems: "center",
       }}
     >
+      <Button>Add content</Button>
+
       <Text>Viewing stored data</Text>
 
       {items.map((item) => (
-        <Text key={item.id}>{item.content_description}</Text>
+        <Text key={item.id}>
+          {" "}
+          {item.id} {item.content_description}
+        </Text>
       ))}
     </View>
   );
