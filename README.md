@@ -28,3 +28,5 @@ You can start developing by editing the files inside the **app** directory. This
 
 [Localisation API](https://poeditor.com/features/)
 
+[Nativewind](https://nativewind.dev)
+[NativewindUI](https://nativewindui.com)
