@@ -5,12 +5,17 @@ import { useEffect, useState } from "react";
 import { contentTable } from "../db/schema";
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 import migrations from "../drizzle/migrations";
+import { Modal } from "react-native";
 
 const expo = SQLite.openDatabaseSync("db.db");
 
 const db = drizzle(expo);
 
 export default function Index() {
+  const [isModalVisible, setModalVisibility] = useState(false);
+  const toggleModal = () => {
+    setModalVisibility(!isModalVisible);
+  };
   const { success, error } = useMigrations(db, migrations);
   const [items, setItems] = useState<
     (typeof contentTable.$inferSelect)[] | null
@@ -20,8 +25,6 @@ export default function Index() {
     if (!success) return;
 
     (async () => {
-      await db.delete(contentTable);
-
       await db.insert(contentTable).values([
         {
           content_description: "Test content",
